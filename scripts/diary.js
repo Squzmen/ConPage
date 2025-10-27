@@ -89,3 +89,23 @@ function showNotification(message, type) {
         }
     }, 3000);
 }
+// Добавлю в diary.js (в конец файла)
+// Адаптивные функции для дневника
+function adaptTimelineForMobile() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const isMobile = window.innerWidth < 768;
+    
+    timelineItems.forEach(item => {
+        if (isMobile) {
+            item.style.paddingLeft = '2rem';
+        } else {
+            item.style.paddingLeft = '';
+        }
+    });
+}
+
+// Инициализируем адаптацию
+document.addEventListener('DOMContentLoaded', function() {
+    adaptTimelineForMobile();
+    window.addEventListener('resize', adaptTimelineForMobile);
+});

@@ -1,21 +1,21 @@
 // Contacts form functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.getElementById('contactForm');
-    
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
-            
+
             if (name && email && subject && message) {
                 // Здесь будет отправка формы на сервер
                 simulateFormSubmission(name, email, subject, message);
                 contactForm.reset();
-                
+
                 showNotification('Сообщение отправлено! Я свяжусь с вами в ближайшее время.', 'success');
             } else {
                 showNotification('Пожалуйста, заполните все поля', 'error');
@@ -27,14 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
 function simulateFormSubmission(name, email, subject, message) {
     // В реальном проекте здесь будет AJAX запрос к серверу
     console.log('Форма отправлена:', { name, email, subject, message });
-    
+
     // Добавляем анимацию успешной отправки
     const submitBtn = document.querySelector('#contactForm button[type="submit"]');
     const originalText = submitBtn.innerHTML;
-    
+
     submitBtn.innerHTML = '<i class="bi bi-check-circle"></i> Отправлено!';
     submitBtn.disabled = true;
-    
+
     setTimeout(() => {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
@@ -56,9 +56,9 @@ function showNotification(message, type) {
         ${message}
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Автоматически скрываем через 5 секунд
     setTimeout(() => {
         if (notification.parentNode) {
@@ -66,3 +66,19 @@ function showNotification(message, type) {
         }
     }, 5000);
 }
+// Добавлю в contacts.js (в конец файла)
+// Адаптивные функции для контактов
+function adaptContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    const isMobile = window.innerWidth < 768;
+
+    if (contactForm && isMobile) {
+        // Добавляем дополнительные стили для мобильных
+        contactForm.style.fontSize = '16px'; // Предотвращает зум в iOS
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    adaptContactForm();
+    window.addEventListener('resize', adaptContactForm);
+});

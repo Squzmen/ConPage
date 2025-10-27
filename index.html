@@ -1,5 +1,7 @@
+<!-- Обновленный index.html -->
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +12,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
-<body>
+
+<body class="loaded">
     <!-- Matrix Background Canvas -->
     <canvas id="matrix"></canvas>
 
@@ -20,7 +23,8 @@
             <a class="navbar-brand glow-text" href="index.html">
                 <i class="bi bi-code-slash"></i> DevPort
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -46,14 +50,14 @@
     <section class="hero-section">
         <div class="container">
             <div class="row align-items-center min-vh-100">
-                <div class="col-lg-6">
+                <div class="col-lg-6 order-lg-1 order-2">
                     <div class="hero-content">
                         <h1 class="hero-title glow-text">
                             Привет, я <span class="text-primary">Александр</span>
                         </h1>
                         <p class="hero-subtitle">FullStack Developer</p>
-                        <p class="hero-description">
-                            Студент факультета фулстек программирования. Специализируюсь на создании 
+                        <p class="hero-description adaptive-text">
+                            Студент факультета фулстек программирования. Специализируюсь на создании
                             и изучении самых бесполезных знаний и технологий.
                         </p>
                         <div class="hero-buttons">
@@ -66,10 +70,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 order-lg-2 order-1">
                     <div class="hero-image">
                         <div class="floating-card">
-                            <img src="images/wrizz-monkey-monkey.gif" alt="Фото студента" class="profile-img">
+                            <img src="images/wrizz-monkey-monkey.gif" 
+                                 alt="Фото студента - Александр"
+                                 class="profile-img responsive-img high-dpi-img"
+                                 loading="eager"
+                                 width="350" 
+                                 height="350">
                             <div class="floating-elements">
                                 <div class="floating-element element-1">
                                     <i class="bi bi-react"></i>
@@ -81,6 +90,13 @@
                                     <i class="bi bi-database"></i>
                                 </div>
                             </div>
+                        </div>
+                        
+                        <!-- Кнопка скачать резюме -->
+                        <div class="resume-download mt-5 pt-4">
+                            <a href="../assets/resume.pdf" class="btn btn-outline-primary btn-glow" download>
+                                <i class="bi bi-download me-2"></i>Скачать резюме
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -94,49 +110,53 @@
             <h2 class="section-title text-center mb-5 glow-text">
                 <i class="bi bi-graph-up-arrow"></i> Технические навыки
             </h2>
-            
+
             <div class="row g-4">
-                <div class="col-md-6">
+                <div class="col-md-6 col-12">
                     <div class="skill-card">
                         <div class="skill-header">
                             <span>Лежание на диване</span>
                             <span class="skill-percent">90%</span>
                         </div>
                         <div class="progress matrix-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                            <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-12">
                     <div class="skill-card">
                         <div class="skill-header">
                             <span>PascalABC</span>
                             <span class="skill-percent">85%</span>
                         </div>
                         <div class="progress matrix-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                            <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-12">
                     <div class="skill-card">
                         <div class="skill-header">
                             <span>YoptaScript</span>
                             <span class="skill-percent">80%</span>
                         </div>
                         <div class="progress matrix-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 80%"></div>
+                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-12">
                     <div class="skill-card">
                         <div class="skill-header">
                             <span>Ничего</span>
                             <span class="skill-percent">75%</span>
                         </div>
                         <div class="progress matrix-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 75%"></div>
+                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
@@ -150,12 +170,21 @@
             <h2 class="section-title text-center mb-5 glow-text">
                 <i class="bi bi-rocket-takeoff"></i> Избранные проекты
             </h2>
-            
+
             <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-3 col-12">
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="images/Babuska.jpg" alt="Комерческий форум">
+                        <div class="project-image image-container ratio-4-3">
+                            <picture>
+                                <source media="(min-width: 1200px)" srcset="images/Babuska.jpg">
+                                <source media="(min-width: 768px)" srcset="images/Babuska.jpg">
+                                <img src="images/Babuska.jpg" 
+                                    alt="Комерческий форум - платформа для продаж"
+                                    class="responsive-img object-fit-cover"
+                                    loading="lazy"
+                                    width="300"
+                                    height="225">
+                            </picture>
                             <div class="project-overlay">
                                 <div class="project-tech">
                                     <span class="badge bg-primary">Стул</span>
@@ -165,16 +194,25 @@
                         </div>
                         <div class="project-content">
                             <h5>Commerce Platform</h5>
-                            <p>Полнофункциональная платформа для продаж</p>
+                            <p class="adaptive-text">Полнофункциональная платформа для продаж</p>
                             <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">Подробнее</a>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-md-6 col-lg-3">
+
+                <div class="col-md-6 col-lg-3 col-12">
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="images/Taktika.jpg" alt="Тактический менеджер">
+                        <div class="project-image image-container ratio-4-3">
+                            <picture>
+                                <source media="(min-width: 1200px)" srcset="images/Taktika.jpg">
+                                <source media="(min-width: 768px)" srcset="images/Taktika.jpg">
+                                <img src="images/Taktika.jpg" 
+                                    alt="Тактический менеджер"
+                                    class="responsive-img object-fit-cover"
+                                    loading="lazy"
+                                    width="300"
+                                    height="225">
+                            </picture>
                             <div class="project-overlay">
                                 <div class="project-tech">
                                     <span class="badge bg-warning">3 бутылки пива</span>
@@ -184,16 +222,25 @@
                         </div>
                         <div class="project-content">
                             <h5>Тактический менеджер</h5>
-                            <p>Умный менеджер задач с AI-аналитикой</p>
+                            <p class="adaptive-text">Умный менеджер задач с AI-аналитикой</p>
                             <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">Подробнее</a>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-md-6 col-lg-3">
+
+                <div class="col-md-6 col-lg-3 col-12">
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="images/i.webp" alt="War Visualization">
+                        <div class="project-image image-container ratio-4-3">
+                            <picture>
+                                <source media="(min-width: 1200px)" srcset="images/i.webp">
+                                <source media="(min-width: 768px)" srcset="images/i.webp">
+                                <img src="images/i.webp" 
+                                    alt="War Visualization"
+                                    class="responsive-img object-fit-cover"
+                                    loading="lazy"
+                                    width="300"
+                                    height="225">
+                            </picture>
                             <div class="project-overlay">
                                 <div class="project-tech">
                                     <span class="badge bg-danger">Бредли</span>
@@ -203,16 +250,25 @@
                         </div>
                         <div class="project-content">
                             <h5>War Analytics</h5>
-                            <p>Инструмент для визуализации big data</p>
+                            <p class="adaptive-text">Инструмент для визуализации big data</p>
                             <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">Подробнее</a>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-md-6 col-lg-3">
+
+                <div class="col-md-6 col-lg-3 col-12">
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="images/Menty.jpg" alt="Анализ рынка">
+                        <div class="project-image image-container ratio-4-3">
+                            <picture>
+                                <source media="(min-width: 1200px)" srcset="images/Menty.jpg">
+                                <source media="(min-width: 768px)" srcset="images/Menty.jpg">
+                                <img src="images/Menty.jpg" 
+                                    alt="Анализ рынка"
+                                    class="responsive-img object-fit-cover"
+                                    loading="lazy"
+                                    width="300"
+                                    height="225">
+                            </picture>
                             <div class="project-overlay">
                                 <div class="project-tech">
                                     <span class="badge bg-purple">Валера</span>
@@ -222,13 +278,13 @@
                         </div>
                         <div class="project-content">
                             <h5>Анализатор рынка</h5>
-                            <p>Мобильное приложение для отслеживания финансовой активности</p>
+                            <p class="adaptive-text">Мобильное приложение для отслеживания финансовой активности</p>
                             <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">Подробнее</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="text-center mt-4">
                 <a href="pages/projects.html" class="btn btn-primary btn-glow">
                     <i class="bi bi-grid-3x3-gap"></i> Все проекты
@@ -241,15 +297,15 @@
     <footer class="custom-footer py-4">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 DevPort. Это всё равно никчто не читает</p>
+                <div class="col-md-6 col-12 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 DevPort. Это всё равно никто не читает</p>
                 </div>
-                <div class="col-md-6 text-md-end">
+                <div class="col-md-6 col-12 text-center text-md-end mt-3 mt-md-0">
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="bi bi-github"></i></a>
-                        <a href="#" class="social-link"><i class="bi bi-telegram"></i></a>
-                        <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="bi bi-envelope"></i></a>
+                        <a href="#" class="social-link" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                        <a href="#" class="social-link" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
                     </div>
                 </div>
             </div>
@@ -262,4 +318,6 @@
     <script src="scripts/matrix.js"></script>
     <script src="scripts/main.js"></script>
 </body>
+<a href="#main-content" class="skip-link">Перейти к основному контенту</a>
+
 </html>

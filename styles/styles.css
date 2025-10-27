@@ -3,9 +3,6 @@
     --matrix-green: #00ff41;
     --matrix-dark: #0a0a0a;
     --matrix-darker: #050505;
-    --neon-blue: #00b3ff;
-    --neon-purple: #b300ff;
-    --glow-intensity: 0.8;
 }
 
 /* Base Styles */
@@ -73,21 +70,22 @@ body {
 /* Glow Text Effect */
 .glow-text {
     text-shadow: 0 0 10px var(--matrix-green),
-                 0 0 20px var(--matrix-green),
-                 0 0 40px var(--matrix-green);
+        0 0 20px var(--matrix-green),
+        0 0 40px var(--matrix-green);
     animation: glow-pulse 2s ease-in-out infinite alternate;
 }
 
 @keyframes glow-pulse {
     from {
         text-shadow: 0 0 10px var(--matrix-green),
-                     0 0 20px var(--matrix-green),
-                     0 0 40px var(--matrix-green);
+            0 0 20px var(--matrix-green),
+            0 0 40px var(--matrix-green);
     }
+
     to {
         text-shadow: 0 0 15px var(--matrix-green),
-                     0 0 30px var(--matrix-green),
-                     0 0 60px var(--matrix-green);
+            0 0 30px var(--matrix-green),
+            0 0 60px var(--matrix-green);
     }
 }
 
@@ -110,6 +108,7 @@ body {
     font-size: 1.5rem;
     color: var(--matrix-green);
     margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px var(--matrix-green);
 }
 
 .hero-description {
@@ -124,13 +123,18 @@ body {
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .floating-card {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
     perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-img {
@@ -139,13 +143,43 @@ body {
     object-fit: cover;
     border-radius: 20px;
     border: 3px solid var(--matrix-green);
-    box-shadow: 0 0 30px var(--matrix-green);
+    box-shadow: 
+        0 0 30px var(--matrix-green),
+        0 0 60px rgba(0, 255, 65, 0.3),
+        0 0 100px rgba(0, 255, 65, 0.1);
     animation: float 6s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(1deg); }
-    50% { transform: translateY(-20px) rotate(-1deg); }
+/* Статичный градиентный фон без вращения */
+.floating-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    height: 480px;
+    background: 
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 65, 0.1) 0%,
+            rgba(0, 255, 65, 0.05) 30%,
+            transparent 70%
+        );
+    border-radius: 30px;
+    z-index: 1;
+    animation: gradient-pulse 8s ease-in-out infinite;
+}
+
+@keyframes gradient-pulse {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.8;
+    }
 }
 
 .floating-elements {
@@ -154,44 +188,95 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 3;
 }
 
 .floating-element {
     position: absolute;
-    background: rgba(0, 255, 65, 0.1);
-    border: 1px solid var(--matrix-green);
+    background: rgba(0, 255, 65, 0.15);
+    border: 2px solid var(--matrix-green);
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    animation: float-element 4s ease-in-out infinite;
+    animation: float-element 6s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    backdrop-filter: blur(5px);
 }
 
 .floating-element.element-1 {
-    top: -20px;
-    left: -20px;
+    top: 40px;
+    left: 40px;
     animation-delay: 0s;
 }
 
 .floating-element.element-2 {
-    top: -20px;
-    right: -20px;
-    animation-delay: 1.5s;
+    top: 40px;
+    right: 40px;
+    animation-delay: 2s;
 }
 
 .floating-element.element-3 {
-    bottom: -20px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    animation-delay: 3s;
+    animation-delay: 4s;
 }
 
 @keyframes float-element {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-15px) scale(1.1); }
+    0%, 100% {
+        transform: translateY(0px) translateX(0px) scale(1);
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    }
+    25% {
+        transform: translateY(-30px) translateX(15px) scale(1.1);
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+    }
+    50% {
+        transform: translateY(-50px) translateX(-10px) scale(1.15);
+        box-shadow: 0 0 40px rgba(0, 255, 65, 0.7);
+    }
+    75% {
+        transform: translateY(-30px) translateX(-15px) scale(1.1);
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+    }
+}
+
+/* Улучшенная анимация для гифки */
+@keyframes float {
+    0%, 100% {
+        transform: 
+            translateY(0px) 
+            rotate(1deg)
+            scale(1);
+        box-shadow: 
+            0 0 30px var(--matrix-green),
+            0 0 60px rgba(0, 255, 65, 0.3),
+            0 0 100px rgba(0, 255, 65, 0.1);
+    }
+    33% {
+        transform: 
+            translateY(-20px) 
+            rotate(-0.5deg)
+            scale(1.02);
+        box-shadow: 
+            0 0 40px var(--matrix-green),
+            0 0 80px rgba(0, 255, 65, 0.4),
+            0 0 120px rgba(0, 255, 65, 0.2);
+    }
+    66% {
+        transform: 
+            translateY(-35px) 
+            rotate(0.5deg)
+            scale(1.01);
+        box-shadow: 
+            0 0 35px var(--matrix-green),
+            0 0 70px rgba(0, 255, 65, 0.35),
+            0 0 110px rgba(0, 255, 65, 0.15);
+    }
 }
 
 /* Buttons */
@@ -204,123 +289,128 @@ body {
 .btn-glow::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,255,65,0.2) 0%, transparent 60%);
+    opacity: 0;
+    transition: all 0.5s ease;
 }
 
 .btn-glow:hover::before {
-    left: 100%;
+    opacity: 1;
+    transform: scale(1.2);
 }
 
+.btn-glow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,255,65,0.2);
+}
+
+/* Bootstrap Button Overrides */
 .btn-primary {
-    background: linear-gradient(45deg, var(--matrix-green), var(--neon-blue));
-    border: none;
-    font-weight: bold;
-}
-
-.btn-outline-light {
+    background-color: var(--matrix-green);
     border-color: var(--matrix-green);
-    color: var(--matrix-green);
 }
 
-.btn-outline-light:hover {
+.btn-primary:hover {
+    background-color: #00cc34;
+    border-color: #00cc34;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,255,65,0.2);
+}
+
+.btn-outline-primary {
+    color: var(--matrix-green);
+    border-color: var(--matrix-green);
+}
+
+.btn-outline-primary:hover {
     background-color: var(--matrix-green);
     color: var(--matrix-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,255,65,0.2);
+}
+
+.text-primary {
+    color: var(--matrix-green) !important;
 }
 
 /* Skills Section */
 .skills-section {
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--matrix-green);
-    border-bottom: 1px solid var(--matrix-green);
+    padding-top: 5rem;
+    padding-bottom: 5rem;
 }
 
 .section-title {
-    font-size: 2.5rem;
+    text-align: center;
     margin-bottom: 3rem;
 }
 
 .skill-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(0, 255, 65, 0.3);
-    border-radius: 15px;
-    padding: 1.5rem;
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
 .skill-card:hover {
     transform: translateY(-5px);
-    border-color: var(--matrix-green);
-    box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
+    box-shadow: 0 0 20px var(--matrix-green);
 }
 
 .skill-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 .skill-percent {
     color: var(--matrix-green);
-    font-weight: bold;
 }
 
 .matrix-progress {
-    height: 8px;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
+    height: 8px;
 }
 
-.matrix-progress .progress-bar {
-    background: linear-gradient(90deg, var(--matrix-green), var(--neon-blue));
-    animation: progress-glow 2s ease-in-out infinite;
+.progress-bar {
+    background: var(--matrix-green);
 }
 
-@keyframes progress-glow {
-    0%, 100% { box-shadow: 0 0 5px var(--matrix-green); }
-    50% { box-shadow: 0 0 15px var(--matrix-green); }
+/* Projects Section */
+.projects-preview,
+.projects-page {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
 }
 
-/* Project Cards */
 .project-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(0, 255, 65, 0.3);
-    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    border-color: var(--matrix-green);
-    box-shadow: 0 20px 40px rgba(0, 255, 65, 0.3);
+    transform: translateY(-10px);
 }
 
 .project-image {
     position: relative;
-    height: 200px;
+    height: 250px;
     overflow: hidden;
 }
 
 .project-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.project-card:hover .project-image img {
-    transform: scale(1.1);
+    object-fit: contain;
 }
 
 .project-overlay {
@@ -329,181 +419,71 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: 1rem;
+    background: rgba(0, 0, 0, 0.7);
     opacity: 0;
     transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .project-card:hover .project-overlay {
     opacity: 1;
 }
 
+.project-tech {
+    text-align: center;
+}
+
 .project-content {
-    padding: 1.5rem;
-}
-
-.project-content h5 {
-    color: var(--matrix-green);
-    margin-bottom: 0.5rem;
-}
-
-.project-content p {
-    opacity: 0.8;
-    margin-bottom: 1rem;
+    padding: 1rem;
+    flex-grow: 1;
 }
 
 /* Footer */
 .custom-footer {
     background: rgba(10, 10, 10, 0.95);
     border-top: 1px solid var(--matrix-green);
-    backdrop-filter: blur(10px);
 }
 
 .social-links {
     display: flex;
+    justify-content: center;
     gap: 1rem;
-    justify-content: flex-end;
 }
 
 .social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--matrix-green);
-    border-radius: 50%;
     color: var(--matrix-green);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
 }
 
 .social-link:hover {
-    background: var(--matrix-green);
-    color: var(--matrix-dark);
-    transform: translateY(-3px);
+    color: #ffffff;
 }
 
-/* Badge Colors */
-.bg-purple {
-    background-color: #6f42c1 !important;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .floating-card {
-        width: 250px;
-        height: 250px;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-}
-/* Matrix Grid Specific Styles */
-.matrix-grid-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-/* Улучшаем читаемость контента на фоне */
-.hero-section,
-.skills-section,
-.projects-preview,
-.projects-page,
+/* Diary Section */
 .diary-section,
 .contacts-section {
-    position: relative;
-    z-index: 1;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    margin-top: 3rem;
 }
 
-.hero-content,
-.skill-card,
-.project-card,
-.diary-card,
-.contact-form {
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 255, 65, 0.2);
-}
-
-/* Улучшаем контрастность текста */
-.hero-title,
-.hero-subtitle,
-.section-title,
-.project-content h5,
-.diary-card h5,
-.contact-form h3 {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-/* Анимация для кнопок на фоне матрицы */
-.btn-primary,
-.btn-outline-light {
-    position: relative;
-    z-index: 2;
+.diary-card {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
-.btn-primary:hover,
-.btn-outline-light:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.4);
-}
-
-/* Дополнительные эффекты для карточек */
-.skill-card:hover,
-.project-card:hover,
 .diary-card:hover {
-    border-color: var(--matrix-green);
-    box-shadow: 0 8px 25px rgba(0, 255, 65, 0.15);
-}
-
-/* Адаптивность для матричного фона */
-@media (max-width: 768px) {
-    .matrix-grid-container {
-        font-size: 12px;
-    }
-}
-/* Diary Specific Styles */
-.diary-card {
-    background: rgba(15, 15, 15, 0.8) !important;
-    border-radius: 15px;
-    border: 1px solid rgba(0, 255, 65, 0.3);
-    backdrop-filter: blur(10px);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--matrix-green);
 }
 
 .timeline {
     position: relative;
     padding-left: 2rem;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--matrix-green), transparent);
 }
 
 .timeline-item {
@@ -514,405 +494,491 @@ body {
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: -2rem;
-    top: 5px;
+    left: -1.5rem;
+    top: 0.5rem;
     width: 12px;
     height: 12px;
     border-radius: 50%;
     background: var(--matrix-green);
-    box-shadow: 0 0 10px var(--matrix-green);
 }
 
 .timeline-date {
-    color: var(--matrix-green);
-    font-weight: bold;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-}
-
-.timeline-content {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
-    border-radius: 10px;
-    border-left: 3px solid var(--matrix-green);
 }
 
 .timeline-content h5 {
-    color: var(--matrix-green);
     margin-bottom: 0.5rem;
 }
 
 .status-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    margin-top: 0.5rem;
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
 }
 
 .status-badge.completed {
-    background: rgba(0, 255, 65, 0.2);
+    background: rgba(0, 255, 0, 0.2);
     color: var(--matrix-green);
-    border: 1px solid var(--matrix-green);
 }
 
 .status-badge.in-progress {
-    background: rgba(255, 193, 7, 0.2);
-    color: #ffc107;
-    border: 1px solid #ffc107;
+    background: rgba(255, 165, 0, 0.2);
+    color: orange;
 }
 
 .course-progress {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 255, 65, 0.2);
+    margin-bottom: 1rem;
 }
 
-/* Form Styles */
+/* Contact Form */
+.contact-form {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--matrix-green);
+}
+
 .form-control {
-    border: 1px solid rgba(0, 255, 65, 0.3);
-    color: var(--matrix-green) !important;
-}
-
-.form-control:focus {
-    border-color: var(--matrix-green);
-    box-shadow: 0 0 0 0.2rem rgba(0, 255, 65, 0.25);
-    background: rgba(10, 10, 10, 0.8) !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
 }
 
 .form-label {
-    color: var(--matrix-green);
-    font-weight: bold;
-}
-/* Updated Matrix Grid Styles for Larger Cells */
-.matrix-grid-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
+    color: rgba(255, 255, 255, 0.7);
 }
 
-/* Усиливаем контрастность основного контента */
-.hero-section,
-.skills-section,
-.projects-preview,
-.projects-page,
-.diary-section,
-.contacts-section {
-    position: relative;
-    z-index: 1;
-}
-
-/* Делаем карточки более заметными на фоне */
-.hero-content,
-.skill-card,
-.project-card,
-.diary-card,
-.contact-form {
-    background: rgba(15, 15, 15, 0.85);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(0, 255, 65, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-}
-
-/* Улучшаем читаемость текста */
-.hero-title,
-.hero-subtitle,
-.section-title,
-.project-content h5,
-.diary-card h5,
-.contact-form h3 {
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-    position: relative;
-}
-
-/* Дополнительная обводка для важного текста */
-.glow-text {
-    text-shadow: 0 0 5px rgba(0, 255, 65, 0.3),
-                 0 0 10px rgba(0, 255, 65, 0.2),
-                 0 0 15px rgba(0, 255, 65, 0.1);
-    animation: subtle-glow 3s ease-in-out infinite alternate;
-}
-
-@keyframes subtle-glow {
-    from {
-        text-shadow: 0 0 5px rgba(0, 255, 65, 0.3),
-                     0 0 10px rgba(0, 255, 65, 0.2),
-                     0 0 15px rgba(0, 255, 65, 0.1);
-    }
-    to {
-        text-shadow: 0 0 8px rgba(0, 255, 65, 0.4),
-                     0 0 15px rgba(0, 255, 65, 0.3),
-                     0 0 20px rgba(0, 255, 65, 0.2);
-    }
-}
-
-/* Улучшаем видимость прогресс-баров */
-.matrix-progress {
-    height: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 255, 65, 0.2);
-}
-
-.matrix-progress .progress-bar {
-    background: linear-gradient(90deg, var(--matrix-green), #00cc33);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
-}
-
-/* Улучшаем навигацию */
-.custom-navbar {
-    background: rgba(10, 10, 10, 0.95) !important;
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 255, 65, 0.4);
-}
-
-/* Адаптивность для крупной сетки */
-@media (max-width: 768px) {
-    /* На мобильных устройствах можно немного уменьшить сетку */
-    .matrix-grid-container {
-        font-size: 42px;
-    }
-    
-    .hero-content,
-    .skill-card,
-    .project-card,
-    .diary-card,
-    .contact-form {
-        background: rgba(15, 15, 15, 0.9);
-    }
-}
-
-/* Улучшаем видимость футера */
-.custom-footer {
-    background: rgba(10, 10, 10, 0.98) !important;
-    backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(0, 255, 65, 0.3);
-}
-
-/* Делаем социальные иконки более заметными */
-.social-link {
-    border: 1px solid rgba(0, 255, 65, 0.5);
-    background: rgba(0, 255, 65, 0.1);
+.contact-info {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
-.social-link:hover {
-    background: rgba(0, 255, 65, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.2);
-}
-/* Matrix Grid Specific Styles */
-.matrix-grid-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
+.contact-info:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--matrix-green);
 }
 
-/* Усиливаем контрастность основного контента */
-.hero-section,
-.skills-section,
-.projects-preview,
-.projects-page,
-.diary-section,
-.contacts-section {
-    position: relative;
-    z-index: 1;
-}
-
-/* Делаем карточки более плотными и контрастными */
-.hero-content,
-.skill-card,
-.project-card,
-.diary-card,
-.contact-form {
-    background: rgba(8, 8, 8, 0.92);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 255, 0, 0.4);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
-}
-
-/* Улучшаем читаемость текста с более сильными тенями */
-.hero-title,
-.hero-subtitle,
-.section-title,
-.project-content h5,
-.diary-card h5,
-.contact-form h3 {
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95),
-                 0 4px 8px rgba(0, 0, 0, 0.8);
-    position: relative;
-}
-
-/* Обновляем цвет переменных для кислотно-зеленого */
-:root {
-    --matrix-green: #00ff00; /* Яркий кислотно-зеленый */
-    --matrix-dark: #0a0a0a;
-    --matrix-darker: #050505;
-    --neon-blue: #00b3ff;
-    --neon-purple: #b300ff;
-    --glow-intensity: 0.8;
-}
-
-/* Обновляем glow-text для нового цвета */
-.glow-text {
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.4),
-                 0 0 10px rgba(0, 255, 0, 0.3),
-                 0 0 15px rgba(0, 255, 0, 0.2);
-    animation: subtle-glow 3s ease-in-out infinite alternate;
-}
-
-@keyframes subtle-glow {
-    from {
-        text-shadow: 0 0 5px rgba(0, 255, 0, 0.4),
-                     0 0 10px rgba(0, 255, 0, 0.3),
-                     0 0 15px rgba(0, 255, 0, 0.2);
-    }
-    to {
-        text-shadow: 0 0 8px rgba(0, 255, 0, 0.5),
-                     0 0 15px rgba(0, 255, 0, 0.4),
-                     0 0 20px rgba(0, 255, 0, 0.3);
-    }
-}
-
-/* Обновляем прогресс-бары */
-.matrix-progress {
-    height: 10px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 255, 0, 0.3);
-}
-
-.matrix-progress .progress-bar {
-    background: linear-gradient(90deg, var(--matrix-green), #00cc00);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
-}
-
-/* Обновляем навигацию */
-.custom-navbar {
-    background: rgba(8, 8, 8, 0.98) !important;
-    backdrop-filter: blur(25px);
-    border-bottom: 1px solid rgba(0, 255, 0, 0.5);
-}
-
-.nav-link::after {
-    background: var(--matrix-green);
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--matrix-green) !important;
-}
-
-/* Обновляем кнопки */
-.btn-primary {
-    background: linear-gradient(45deg, var(--matrix-green), #00cc00);
-    border: none;
-    color: #000 !important;
-    font-weight: bold;
-}
-
-.btn-outline-light {
-    border-color: var(--matrix-green);
+.contact-icon {
     color: var(--matrix-green);
 }
 
-.btn-outline-light:hover {
+/* Project Filters */
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Mobile Improvements */
+.form-control {
+    min-height: 44px;
+}
+
+.btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: 1.5rem;
+    }
+
+    .timeline-item::before {
+        left: -1.2rem;
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .filter-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-buttons .btn {
+        min-width: 200px;
+    }
+}
+
+.custom-navbar {
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
+    padding-left: env(safe-area-inset-left);
+    isolation: isolate;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 1.5rem;
+    container-type: inline-size;
+}
+
+@container (min-width: 400px) {
+    .project-card {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@container (min-width: 600px) {
+    .project-card {
+        flex-direction: column;
+    }
+}
+
+/* Resume Download Styles */
+.resume-download {
+    text-align: center;
+    animation: fadeInUp 0.8s ease 0.5s both;
+    margin-top: 4rem;
+}
+
+.resume-download .btn {
+    min-width: 200px;
+    font-weight: 600;
+    border-width: 2px;
+    padding: 0.75rem 1.5rem;
+    border-color: var(--matrix-green);
+    color: var(--matrix-green);
+    background: transparent;
+    animation: float 6s ease-in-out infinite;
+}
+
+.resume-download .btn:hover {
     background-color: var(--matrix-green);
     color: var(--matrix-dark);
-}
-
-/* Обновляем карточки проектов и навыков */
-.skill-card:hover,
-.project-card:hover,
-.diary-card:hover {
-    border-color: var(--matrix-green);
-    box-shadow: 0 10px 35px rgba(0, 255, 0, 0.25);
-    transform: translateY(-5px);
-}
-
-/* Обновляем футер */
-.custom-footer {
-    background: rgba(8, 8, 8, 0.98) !important;
-    backdrop-filter: blur(25px);
-    border-top: 1px solid rgba(0, 255, 0, 0.4);
-}
-
-/* Обновляем социальные иконки */
-.social-link {
-    border: 1px solid rgba(0, 255, 0, 0.6);
-    background: rgba(0, 255, 0, 0.15);
-    transition: all 0.3s ease;
-}
-
-.social-link:hover {
-    background: rgba(0, 255, 0, 0.4);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
 }
 
-/* Адаптивность для плотной сетки */
+/* Fade In Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive for Resume Button */
 @media (max-width: 768px) {
-    .hero-content,
-    .skill-card,
-    .project-card,
-    .diary-card,
-    .contact-form {
-        background: rgba(8, 8, 8, 0.95);
+    .resume-download {
+        margin-top: 3rem !important;
     }
     
-    /* На мобильных делаем контент еще более контрастным */
-    .hero-title,
-    .section-title {
-        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.98);
+    .resume-download .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .profile-img {
+        width: 250px;
+        height: 250px;
     }
 }
 
-/* Дополнительные стили для лучшей читаемости */
-.hero-description,
-.project-content p,
-.diary-card p,
-.contact-info p {
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+/* Адаптивные изображения */
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Поддержка Retina дисплеев */
+.retina-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Object-fit свойства для контейнеров */
+.object-fit-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.object-fit-contain {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Адаптивная галерея проектов */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 1.5rem;
+    container-type: inline-size;
+}
+
+/* Адаптивные контейнеры для изображений */
+.image-container {
     position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
 }
 
-/* Улучшаем видимость форм */
-.form-control {
-    border: 1px solid rgba(0, 255, 0, 0.4);
-    color: var(--matrix-green) !important;
-    background: rgba(10, 10, 10, 0.9) !important;
+.image-container.ratio-16-9 {
+    aspect-ratio: 16 / 9;
 }
 
-.form-control:focus {
-    border-color: var(--matrix-green);
-    box-shadow: 0 0 0 0.2rem rgba(0, 255, 0, 0.25);
-    background: rgba(8, 8, 8, 0.95) !important;
+.image-container.ratio-1-1 {
+    aspect-ratio: 1 / 1;
 }
 
-.form-label {
-    color: var(--matrix-green);
-    font-weight: bold;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+.image-container.ratio-4-3 {
+    aspect-ratio: 4 / 3;
 }
+
+/* Адаптивные формы */
+.adaptive-form .form-control {
+    font-size: 16px;
+    min-height: 44px;
+}
+
+.adaptive-form .form-label {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* Адаптивные таблицы */
+.adaptive-table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+.adaptive-table table {
+    min-width: 600px;
+    width: 100%;
+}
+
+/* Медиа-запросы для специфических улучшений */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+        gap: 1rem;
+    }
+    
+    .image-container.mobile-full {
+        aspect-ratio: unset;
+        height: auto;
+        max-height: 50vh;
+    }
+    
+    /* Улучшения для touch устройств */
+    .btn, .form-control, .nav-link {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Уменьшаем opacity матрицы на мобильных */
+    #matrix {
+        opacity: 0.15;
+    }
+    
+    /* Адаптивность для floating-card */
+    .floating-card {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .profile-img {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .floating-card::before {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .floating-element {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .floating-element.element-1 {
+        top: 20px;
+        left: 20px;
+    }
+    
+    .floating-element.element-2 {
+        top: 20px;
+        right: 20px;
+    }
+    
+    .floating-element.element-3 {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-buttons .btn {
+        margin: 2px 0;
+    }
+    
+    .floating-card {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .profile-img {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .floating-card::before {
+        width: 270px;
+        height: 270px;
+    }
+}
+
+/* Поддержка высоких DPI экранов */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .high-dpi-img {
+        image-rendering: -webkit-optimize-contrast;
+        transform: translateZ(0);
+    }
+}
+
+/* Lazy loading стили */
+.lazy-img {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lazy-img.loaded {
+    opacity: 1;
+}
+
+/* Адаптивная типографика */
+.adaptive-text {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    line-height: 1.6;
+}
+
+/* Контейнерные запросы для проектов */
+@container (min-width: 400px) {
+    .project-card {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1rem;
+    }
+}
+
+@container (max-width: 399px) {
+    .project-card {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Стили для адаптивных фильтров проектов */
 .filter-buttons .btn {
     margin: 0 5px 10px;
     transition: all 0.3s ease;
+    border-color: var(--matrix-green);
+    color: var(--matrix-green);
+}
+
+.filter-buttons .btn:hover {
+    background: rgba(0, 255, 0, 0.1);
+    transform: translateY(-2px);
 }
 
 .filter-buttons .btn.active {
     background: var(--matrix-green);
     color: var(--matrix-dark);
     border-color: var(--matrix-green);
+}
+
+.project-meta .badge {
+    font-size: 0.7rem;
+}
+
+/* Fallback для браузеров без поддержки контейнерных запросов */
+.mobile-layout .project-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Улучшения для плавности анимации */
+.floating-card {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.profile-img {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.floating-element {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Оптимизация для слабых устройств */
+@media (prefers-reduced-motion: reduce) {
+    .floating-card::before,
+    .profile-img,
+    .floating-element {
+        animation-duration: 0.1s;
+        animation-iteration-count: 1;
+    }
+}
+
+/* Улучшение контрастности для доступности */
+@media (prefers-contrast: high) {
+    .floating-element {
+        background: rgba(0, 255, 65, 0.3);
+        border: 3px solid var(--matrix-green);
+    }
+    
+    .profile-img {
+        border: 4px solid var(--matrix-green);
+    }
+}
+
+/* Улучшенный градиент для темной темы */
+@media (prefers-color-scheme: dark) {
+    .floating-card::before {
+        background: 
+            radial-gradient(
+                circle at center,
+                rgba(0, 255, 65, 0.12) 0%,
+                rgba(0, 255, 65, 0.06) 30%,
+                transparent 70%
+            );
+    }
 }

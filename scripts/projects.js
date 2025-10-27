@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
             status: "Бета",
             absurdity: "96%"
         },
-
     ];
 
     // Функция для отрисовки проектов
@@ -119,8 +118,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
             projectCol.innerHTML = `
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="${project.image}" alt="${project.title}" onerror="this.src='../images/Babuska.jpg'">
+                    <div class="project-image image-container ratio-4-3">
+                        <picture>
+                            <source media="(min-width: 1200px)" srcset="${project.image}">
+                            <source media="(min-width: 768px)" srcset="${project.image}">
+                            <img src="${project.image}" 
+                                 alt="${project.title}"
+                                 class="responsive-img object-fit-cover"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </picture>
                         <div class="project-overlay">
                             <div class="project-tech">
                                 ${technologiesHTML}
@@ -129,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="project-content">
                         <h5>${project.title}</h5>
-                        <p>${project.description}</p>
+                        <p class="adaptive-text">${project.description}</p>
                         <div class="project-meta mt-3">
                             <span class="badge bg-purple me-2">Абсурдность: ${project.absurdity}</span>
                             <span class="badge ${getStatusBadgeClass(project.status)}">${project.status}</span>
@@ -140,6 +148,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             projectsGrid.appendChild(projectCol);
         });
+
+        // Инициализируем оптимизацию загрузки
+        optimizeImageLoading();
     }
 
     // Функция для получения класса бейджа статуса
@@ -170,33 +181,85 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Первоначальная отрисовка
+    // Оптимизация загрузки изображений
+    function optimizeImageLoading() {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        // Intersection Observer для lazy loading
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.remove('lazy-img');
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => {
+                img.classList.add('lazy-img');
+                imageObserver.observe(img);
+            });
+        }
+    }
+
+    // Адаптивная инициализация проектов
+    function initProjects() {
+        // Перерисовываем проекты при изменении размера окна
+        window.addEventListener('resize', function() {
+            renderProjects(getCurrentFilter());
+        });
+    }
+
+    function getCurrentFilter() {
+        const activeButton = document.querySelector('.filter-buttons .btn.active');
+        return activeButton ? activeButton.getAttribute('data-filter') : 'all';
+    }
+
+    // Инициализация адаптивных фильтров
+    function initAdaptiveFilters() {
+        const filterContainer = document.querySelector('.filter-buttons');
+        if (filterContainer) {
+            // Контейнерные запросы для фильтров
+            if (CSS.supports('container-type: inline-size')) {
+                filterContainer.style.containerType = 'inline-size';
+            }
+        }
+    }
+
+    // Fallback для контейнерных запросов
+    function initContainerQueriesFallback() {
+        if (!CSS.supports('container-type: inline-size')) {
+            document.querySelectorAll('.project-card').forEach(card => {
+                const width = card.offsetWidth;
+                if (width < 400) {
+                    card.classList.add('mobile-layout');
+                }
+            });
+            
+            window.addEventListener('resize', function() {
+                document.querySelectorAll('.project-card').forEach(card => {
+                    const width = card.offsetWidth;
+                    if (width < 400) {
+                        card.classList.add('mobile-layout');
+                    } else {
+                        card.classList.remove('mobile-layout');
+                    }
+                });
+            });
+        }
+    }
+
+    // Первоначальная отрисовка и инициализация
     renderProjects();
+    initProjects();
+    initAdaptiveFilters();
+    initContainerQueriesFallback();
+    
+    // Добавляем обработчик для touch устройств
+    if ('ontouchstart' in window) {
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    }
 });
-
-// Добавляем стили для кнопок фильтров в projects.html
-const style = document.createElement('style');
-style.textContent = `
-    .filter-buttons .btn {
-        margin: 0 5px 10px;
-        transition: all 0.3s ease;
-        border-color: var(--matrix-green);
-        color: var(--matrix-green);
-    }
-
-    .filter-buttons .btn:hover {
-        background: rgba(0, 255, 0, 0.1);
-        transform: translateY(-2px);
-    }
-
-    .filter-buttons .btn.active {
-        background: var(--matrix-green);
-        color: var(--matrix-dark);
-        border-color: var(--matrix-green);
-    }
-
-    .project-meta .badge {
-        font-size: 0.7rem;
-    }
-`;
-document.head.appendChild(style);
