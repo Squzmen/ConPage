@@ -1,23 +1,28 @@
-<!-- Обновленный diary.html -->
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Учебный дневник fullstack разработчика">
     <title>Дневник - DevPort</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
-<body class="loaded">
-    <canvas id="matrix"></canvas>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+<body class="loaded">
+
+    <canvas id="matrix" aria-hidden="true"></canvas>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar" aria-label="Основная навигация">
         <div class="container">
             <a class="navbar-brand glow-text" href="../index.html">
-                <i class="bi bi-code-slash"></i> DevPort
+                <i class="bi bi-code-slash" aria-hidden="true"></i>
+                <span>DevPort</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -29,7 +34,9 @@
                         <a class="nav-link" href="projects.html">Проекты</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="diary.html">Дневник</a>
+                        <a class="nav-link active" href="diary.html" aria-current="page">
+                            Дневник
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contacts.html">Контакты</a>
@@ -39,137 +46,183 @@
         </div>
     </nav>
 
-    <section class="diary-section py-5 mt-5">
-        <div class="container">
-            <h1 class="text-center mb-5 glow-text">
-                <i class="bi bi-journal-text"></i> Учебный дневник
-            </h1>
+    <main id="main-content">
+        <section class="diary-section py-5 mt-5" aria-labelledby="diary-title">
+            <div class="container">
+                <h1 id="diary-title" class="text-center mb-5 glow-text">
+                    <i class="bi bi-journal-text" aria-hidden="true"></i> Учебный дневник
+                </h1>
 
-            <div class="row">
-                <div class="col-lg-8 col-12">
-                    <div class="diary-card p-4 mb-4">
-                        <h3 class="mb-4">Хронология прогресса</h3>
-                        
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-date">15 Дек 2025</div>
-                                <div class="timeline-content">
-                                    <h5>Верстка адаптивного макета</h5>
-                                    <p>Освоил создание responsive design с использованием CSS Grid и Flexbox. Создал несколько макетов для разных устройств.</p>
-                                    <div class="status-badge completed">
-                                        <i class="bi bi-check-circle"></i> Завершено
+                <div class="row">
+                    <div class="col-lg-8 col-12">
+                        <div class="diary-card p-4 mb-4">
+                            <h2 class="mb-4">Хронология прогресса</h2>
+
+                            <div class="timeline" role="list" aria-label="Хронология обучения">
+                                <div class="timeline-item" role="listitem">
+                                    <div class="timeline-date">15 Дек 2025</div>
+                                    <div class="timeline-content">
+                                        <h3>Верстка адаптивного макета</h3>
+                                        <p>Освоил создание responsive design с использованием CSS Grid и Flexbox. Создал
+                                            несколько макетов для разных устройств.</p>
+                                        <div class="status-badge completed">
+                                            <i class="bi bi-check-circle" aria-hidden="true"></i>
+                                            <span>Завершено</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-date">10 Дек 2025</div>
-                                <div class="timeline-content">
-                                    <h5>JavaScript основы</h5>
-                                    <p>Изучил основы JavaScript: функции, массивы, объекты, DOM manipulation. Создал несколько интерактивных элементов.</p>
-                                    <div class="status-badge completed">
-                                        <i class="bi bi-check-circle"></i> Завершено
+
+                                <div class="timeline-item" role="listitem">
+                                    <div class="timeline-date">10 Дек 2025</div>
+                                    <div class="timeline-content">
+                                        <h3>JavaScript основы</h3>
+                                        <p>Изучил основы JavaScript: функции, массивы, объекты, DOM manipulation. Создал
+                                            несколько интерактивных элементов.</p>
+                                        <div class="status-badge completed">
+                                            <i class="bi bi-check-circle" aria-hidden="true"></i>
+                                            <span>Завершено</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-date">05 Дек 2025</div>
-                                <div class="timeline-content">
-                                    <h5>Работа с формами</h5>
-                                    <p>Изучаю валидацию форм, обработку событий и создание динамических интерфейсов.</p>
-                                    <div class="status-badge in-progress">
-                                        <i class="bi bi-arrow-repeat"></i> В процессе
+
+                                <div class="timeline-item" role="listitem">
+                                    <div class="timeline-date">05 Дек 2025</div>
+                                    <div class="timeline-content">
+                                        <h3>Работа с формами</h3>
+                                        <p>Изучаю валидацию форм, обработку событий и создание динамических интерфейсов.
+                                        </p>
+                                        <div class="status-badge in-progress">
+                                            <i class="bi bi-arrow-repeat" aria-hidden="true"></i>
+                                            <span>В процессе</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-date">01 Дек 2025</div>
-                                <div class="timeline-content">
-                                    <h5>Адаптивный дизайн</h5>
-                                    <p>Погружаюсь в advanced техники responsive design и accessibility.</p>
-                                    <div class="status-badge in-progress">
-                                        <i class="bi bi-arrow-repeat"></i> В процессе
+
+                                <div class="timeline-item" role="listitem">
+                                    <div class="timeline-date">01 Дек 2025</div>
+                                    <div class="timeline-content">
+                                        <h3>Адаптивный дизайн</h3>
+                                        <p>Погружаюсь в advanced техники responsive design и accessibility.</p>
+                                        <div class="status-badge in-progress">
+                                            <i class="bi bi-arrow-repeat" aria-hidden="true"></i>
+                                            <span>В процессе</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="col-lg-4 col-12">
-                    <div class="diary-card p-4 mb-4">
-                        <h4 class="mb-4">Текущие курсы</h4>
-                        
-                        <div class="course-progress mb-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Веб-разработка</span>
-                                <span>90%</span>
+
+                    <div class="col-lg-4 col-12">
+                        <div class="diary-card p-4 mb-4">
+                            <h3 class="mb-4">Текущие курсы</h3>
+
+                            <div class="course-progress mb-4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Веб-разработка</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="progress matrix-progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                                        aria-valuemin="0" aria-valuemax="100" aria-label="Веб-разработка: 90%">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="progress matrix-progress">
-                                <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+
+                            <div class="course-progress mb-4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>JavaScript</span>
+                                    <span>70%</span>
+                                </div>
+                                <div class="progress matrix-progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70"
+                                        aria-valuemin="0" aria-valuemax="100" aria-label="JavaScript: 70%">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="course-progress mb-4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>React</span>
+                                    <span>50%</span>
+                                </div>
+                                <div class="progress matrix-progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50"
+                                        aria-valuemin="0" aria-valuemax="100" aria-label="React: 50%">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="course-progress mb-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>JavaScript</span>
-                                <span>70%</span>
-                            </div>
-                            <div class="progress matrix-progress">
-                                <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+
+                        <div class="diary-card p-4">
+                            <h3 class="mb-3">Добавить запись</h3>
+
+                            <!-- Live region for form status -->
+                            <div id="diary-status" aria-live="polite" aria-atomic="true" class="visually-hidden"></div>
+
+                            <form id="diaryForm" novalidate>
+                                <fieldset>
+                                    <legend class="visually-hidden">Форма добавления записи в дневник</legend>
+
+                                    <div class="mb-3">
+                                        <label for="entryDate" class="form-label required">Дата</label>
+                                        <input type="date" class="form-control bg-dark text-light" id="entryDate"
+                                            required aria-describedby="dateError" aria-required="true">
+                                        <div id="dateError" class="invalid-feedback" role="alert">
+                                            Пожалуйста, выберите дату
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="entryTitle" class="form-label required">Тема</label>
+                                        <input type="text" class="form-control bg-dark text-light" id="entryTitle"
+                                            placeholder="Что изучил..." required aria-describedby="titleError"
+                                            aria-required="true">
+                                        <div id="titleError" class="invalid-feedback" role="alert">
+                                            Пожалуйста, введите тему записи
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="entryDescription" class="form-label required">Описание</label>
+                                        <textarea class="form-control bg-dark text-light" id="entryDescription" rows="3"
+                                            placeholder="Подробности..." required aria-describedby="descriptionError"
+                                            aria-required="true"></textarea>
+                                        <div id="descriptionError" class="invalid-feedback" role="alert">
+                                            Пожалуйста, введите описание
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-glow w-100">
+                                        <i class="bi bi-plus-circle" aria-hidden="true"></i>
+                                        Добавить запись
+                                    </button>
+                                </fieldset>
+                            </form>
                         </div>
-                        
-                        <div class="course-progress mb-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>React</span>
-                                <span>50%</span>
-                            </div>
-                            <div class="progress matrix-progress">
-                                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="diary-card p-4">
-                        <h4 class="mb-3">Добавить запись</h4>
-                        <form id="diaryForm">
-                            <div class="mb-3">
-                                <label for="entryDate" class="form-label">Дата</label>
-                                <input type="date" class="form-control bg-dark text-light" id="entryDate" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="entryTitle" class="form-label">Тема</label>
-                                <input type="text" class="form-control bg-dark text-light" id="entryTitle" placeholder="Что изучил..." required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="entryDescription" class="form-label">Описание</label>
-                                <textarea class="form-control bg-dark text-light" id="entryDescription" rows="3" placeholder="Подробности..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-glow w-100">
-                                <i class="bi bi-plus-circle"></i> Добавить запись
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="custom-footer py-4">
+    <footer class="custom-footer py-4" role="contentinfo">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-12 text-center text-md-start">
                     <p class="mb-0">&copy; 2025 DevPort. Это всё равно никто не читает</p>
                 </div>
                 <div class="col-md-6 col-12 text-center text-md-end mt-3 mt-md-0">
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="GitHub"><i class="bi bi-github"></i></a>
-                        <a href="#" class="social-link" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                    <div class="social-links" role="list">
+                        <a href="#" class="social-link" aria-label="GitHub" role="listitem">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Telegram" role="listitem">
+                            <i class="bi bi-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn" role="listitem">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email" role="listitem">
+                            <i class="bi bi-envelope"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -181,5 +234,5 @@
     <script src="../scripts/diary.js"></script>
     <script src="../scripts/main.js"></script>
 </body>
-<a href="#main-content" class="skip-link">Перейти к основному контенту</a>
+
 </html>

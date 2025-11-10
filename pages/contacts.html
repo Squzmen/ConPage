@@ -1,23 +1,28 @@
-<!-- Обновленный contacts.html -->
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Свяжитесь со мной через форму обратной связи">
     <title>Контакты - DevPort</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
-<body class="loaded">
-    <canvas id="matrix"></canvas>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+<body class="loaded">
+
+    <canvas id="matrix" aria-hidden="true"></canvas>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar" aria-label="Основная навигация">
         <div class="container">
             <a class="navbar-brand glow-text" href="../index.html">
-                <i class="bi bi-code-slash"></i> DevPort
+                <i class="bi bi-code-slash" aria-hidden="true"></i>
+                <span>DevPort</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -32,99 +37,154 @@
                         <a class="nav-link" href="diary.html">Дневник</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="contacts.html">Контакты</a>
+                        <a class="nav-link active" href="contacts.html" aria-current="page">
+                            Контакты
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="contacts-section py-5 mt-5">
-        <div class="container">
-            <h1 class="text-center mb-5 glow-text">
-                <i class="bi bi-chat-dots"></i> Свяжитесь со мной
-            </h1>
+    <main id="main-content">
+        <section class="contacts-section py-5 mt-5" aria-labelledby="contacts-title">
+            <div class="container">
+                <h1 id="contacts-title" class="text-center mb-5 glow-text">
+                    <i class="bi bi-chat-dots" aria-hidden="true"></i>
+                    Свяжитесь со мной
+                </h1>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-12">
-                    <div class="contact-form p-4 mb-5 adaptive-form">
-                        <h3 class="text-center mb-4 adaptive-text">Отправить сообщение</h3>
-                        <form id="contactForm" class="adaptive-form">
-                            <div class="row">
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="name" class="form-label">Имя *</label>
-                                    <input type="text" class="form-control bg-dark text-light" id="name" required
-                                           aria-describedby="nameHelp">
-                                    <div id="nameHelp" class="form-text">Минимум 2 символа</div>
-                                </div>
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="email" class="form-label">Email *</label>
-                                    <input type="email" class="form-control bg-dark text-light" id="email" required
-                                           inputmode="email">
-                                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-12">
+                        <div class="contact-form p-4 mb-5 adaptive-form">
+                            <h2 class="text-center mb-4 adaptive-text">Отправить сообщение</h2>
+
+                            <!-- Live region for form status -->
+                            <div id="form-status" aria-live="polite" aria-atomic="true" class="visually-hidden"></div>
+
+                            <form id="contactForm" class="adaptive-form" novalidate>
+                                <fieldset>
+                                    <legend class="visually-hidden">Форма обратной связи</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-12 mb-3">
+                                            <label for="name" class="form-label required">
+                                                Имя
+                                            </label>
+                                            <input type="text" class="form-control bg-dark text-light" id="name"
+                                                name="name" required aria-describedby="nameHelp nameError"
+                                                aria-required="true">
+                                            <div id="nameHelp" class="form-text">
+                                                Минимум 2 символа
+                                            </div>
+                                            <div id="nameError" class="invalid-feedback" role="alert">
+                                                Пожалуйста, введите ваше имя
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12 mb-3">
+                                            <label for="email" class="form-label required">
+                                                Email
+                                            </label>
+                                            <input type="email" class="form-control bg-dark text-light" id="email"
+                                                name="email" required aria-describedby="emailError" aria-required="true"
+                                                inputmode="email">
+                                            <div id="emailError" class="invalid-feedback" role="alert">
+                                                Пожалуйста, введите корректный email
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="subject" class="form-label required">
+                                            Тема
+                                        </label>
+                                        <input type="text" class="form-control bg-dark text-light" id="subject"
+                                            name="subject" required aria-describedby="subjectError"
+                                            aria-required="true">
+                                        <div id="subjectError" class="invalid-feedback" role="alert">
+                                            Пожалуйста, введите тему сообщения
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="message" class="form-label required">
+                                            Сообщение
+                                        </label>
+                                        <textarea class="form-control bg-dark text-light" id="message" name="message"
+                                            rows="5" required aria-describedby="messageHelp messageError"
+                                            aria-required="true" maxlength="1000"></textarea>
+                                        <div id="messageHelp" class="form-text">
+                                            Осталось символов: <span id="charCount">1000</span>
+                                        </div>
+                                        <div id="messageError" class="invalid-feedback" role="alert">
+                                            Пожалуйста, введите текст сообщения
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-glow w-100">
+                                        <i class="bi bi-send" aria-hidden="true"></i>
+                                        Отправить сообщение
+                                    </button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" role="list">
+                    <div class="col-md-4 col-12 text-center mb-4" role="listitem">
+                        <div class="contact-info">
+                            <div class="contact-icon mb-3">
+                                <i class="bi bi-envelope fs-1 text-primary" aria-hidden="true"></i>
                             </div>
-                            <div class="mb-3">
-                                <label for="subject" class="form-label">Тема *</label>
-                                <input type="text" class="form-control bg-dark text-light" id="subject" required>
+                            <h3>Email</h3>
+                            <p class="adaptive-text">
+                                <a href="mailto:student@edu.ru">student@edu.ru</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 text-center mb-4" role="listitem">
+                        <div class="contact-info">
+                            <div class="contact-icon mb-3">
+                                <i class="bi bi-github fs-1 text-primary" aria-hidden="true"></i>
                             </div>
-                            <div class="mb-4">
-                                <label for="message" class="form-label">Сообщение *</label>
-                                <textarea class="form-control bg-dark text-light" id="message" rows="5" required
-                                          maxlength="1000"></textarea>
-                                <div class="form-text">Осталось символов: <span id="charCount">1000</span></div>
+                            <h3>GitHub</h3>
+                            <p class="adaptive-text">
+                                <a href="https://github.com/username">github.com/username</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 text-center mb-4" role="listitem">
+                        <div class="contact-info">
+                            <div class="contact-icon mb-3">
+                                <i class="bi bi-geo-alt fs-1 text-primary" aria-hidden="true"></i>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-glow w-100">
-                                <i class="bi bi-send"></i> Отправить сообщение
-                            </button>
-                        </form>
+                            <h3>Локация</h3>
+                            <p class="adaptive-text">Москва, Россия</p>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <div class="row">
-                <div class="col-md-4 col-12 text-center mb-4">
-                    <div class="contact-info">
-                        <div class="contact-icon mb-3">
-                            <i class="bi bi-envelope fs-1 text-primary"></i>
-                        </div>
-                        <h5>Email</h5>
-                        <p class="adaptive-text">student@edu.ru</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-12 text-center mb-4">
-                    <div class="contact-info">
-                        <div class="contact-icon mb-3">
-                            <i class="bi bi-github fs-1 text-primary"></i>
-                        </div>
-                        <h5>GitHub</h5>
-                        <p class="adaptive-text">github.com/username</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-12 text-center mb-4">
-                    <div class="contact-info">
-                        <div class="contact-icon mb-3">
-                            <i class="bi bi-geo-alt fs-1 text-primary"></i>
-                        </div>
-                        <h5>Локация</h5>
-                        <p class="adaptive-text">Москва, Россия</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="custom-footer py-4">
+    <footer class="custom-footer py-4" role="contentinfo">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-12 text-center text-md-start">
                     <p class="mb-0">&copy; 2025 DevPort. Это всё равно никто не читает</p>
                 </div>
                 <div class="col-md-6 col-12 text-center text-md-end mt-3 mt-md-0">
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="GitHub"><i class="bi bi-github"></i></a>
-                        <a href="#" class="social-link" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                    <div class="social-links" role="list">
+                        <a href="#" class="social-link" aria-label="GitHub" role="listitem">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Telegram" role="listitem">
+                            <i class="bi bi-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn" role="listitem">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email" role="listitem">
+                            <i class="bi bi-envelope"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -136,5 +196,5 @@
     <script src="../scripts/contacts.js"></script>
     <script src="../scripts/main.js"></script>
 </body>
-<a href="#main-content" class="skip-link">Перейти к основному контенту</a>
+
 </html>

@@ -212,3 +212,91 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('DevPort адаптивный скрипт загружен успешно!');
 });
+// Enhanced main.js with A11y improvements
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize A11y features
+    initAccessibility();
+    
+    // ... остальной существующий код ...
+});
+
+function initAccessibility() {
+    // Enhanced skip link functionality
+    const skipLink = document.querySelector('.skip-link');
+    if (skipLink) {
+        skipLink.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.setAttribute('tabindex', '-1');
+                target.focus();
+                setTimeout(() => target.removeAttribute('tabindex'), 1000);
+            }
+        });
+    }
+
+    // Enhanced focus management for modals
+    function trapFocus(element) {
+        const focusableElements = element.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        element.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                if (e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        });
+    }
+
+    // Announce dynamic content changes to screen readers
+    function announceToScreenReader(message, priority = 'polite') {
+        const announcer = document.getElementById('a11y-announcer') || createAnnouncer();
+        announcer.setAttribute('aria-live', priority);
+        announcer.textContent = message;
+    }
+
+    function createAnnouncer() {
+        const announcer = document.createElement('div');
+        announcer.id = 'a11y-announcer';
+        announcer.setAttribute('aria-live', 'polite');
+        announcer.setAttribute('aria-atomic', 'true');
+        announcer.className = 'visually-hidden';
+        document.body.appendChild(announcer);
+        return announcer;
+    }
+
+    // Enhanced link descriptions
+    function enhanceLinkAccessibility() {
+        const links = document.querySelectorAll('a[href^="http"]:not([href*="' + window.location.host + '"])');
+        links.forEach(link => {
+            if (!link.querySelector('.visually-hidden')) {
+                const srText = document.createElement('span');
+                srText.className = 'visually-hidden';
+                srText.textContent = ' (открывается в новом окне)';
+                link.appendChild(srText);
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+    }
+
+    // Initialize enhancements
+    enhanceLinkAccessibility();
+    createAnnouncer();
+
+    // Expose functions to global scope for use in other scripts
+    window.a11y = {
+        announce: announceToScreenReader,
+        trapFocus: trapFocus
+    };
+}
+
+// ... остальной существующий код ...

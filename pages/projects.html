@@ -1,23 +1,28 @@
-<!-- Обновленный projects.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Портфолио проектов fullstack разработчика">
     <title>Проекты - DevPort</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body class="loaded">
-    <canvas id="matrix"></canvas>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+    <canvas id="matrix" aria-hidden="true"></canvas>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar" 
+         aria-label="Основная навигация">
         <div class="container">
             <a class="navbar-brand glow-text" href="../index.html">
-                <i class="bi bi-code-slash"></i> DevPort
+                <i class="bi bi-code-slash" aria-hidden="true"></i> 
+                <span>DevPort</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                    aria-expanded="false" aria-label="Переключить навигацию">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -26,7 +31,9 @@
                         <a class="nav-link" href="../index.html">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="projects.html">Проекты</a>
+                        <a class="nav-link active" href="projects.html" aria-current="page">
+                            Проекты
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="diary.html">Дневник</a>
@@ -39,45 +46,93 @@
         </div>
     </nav>
 
-    <section class="projects-page py-5 mt-5">
-        <div class="container">
-            <h1 class="text-center mb-5 glow-text">
-                <i class="bi bi-grid-3x3-gap"></i> Мои проекты
-            </h1>
+    <main id="main-content">
+        <section class="projects-page py-5 mt-5" aria-labelledby="projects-title">
+            <div class="container">
+                <h1 id="projects-title" class="text-center mb-5 glow-text">
+                    <i class="bi bi-grid-3x3-gap" aria-hidden="true"></i> Мои проекты
+                </h1>
 
-            <!-- Project Filters -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="filter-buttons text-center">
-                        <button class="btn btn-outline-primary active" data-filter="all">Все</button>
-                        <button class="btn btn-outline-primary" data-filter="web">Веб</button>
-                        <button class="btn btn-outline-primary" data-filter="mobile">Мобильные</button>
-                        <button class="btn btn-outline-primary" data-filter="ai">AI/ML</button>
-                        <button class="btn btn-outline-primary" data-filter="game">Игры</button>
-                        <button class="btn btn-outline-primary" data-filter="data">Данные</button>
+                <!-- Project Filters -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="filter-buttons text-center" role="group" aria-label="Фильтры проектов">
+                            <button class="btn btn-outline-primary active" 
+                                    data-filter="all"
+                                    aria-pressed="true">
+                                Все
+                            </button>
+                            <button class="btn btn-outline-primary" 
+                                    data-filter="web"
+                                    aria-pressed="false">
+                                Веб
+                            </button>
+                            <button class="btn btn-outline-primary" 
+                                    data-filter="mobile"
+                                    aria-pressed="false">
+                                Мобильные
+                            </button>
+                            <button class="btn btn-outline-primary" 
+                                    data-filter="ai"
+                                    aria-pressed="false">
+                                AI/ML
+                            </button>
+                            <button class="btn btn-outline-primary" 
+                                    data-filter="game"
+                                    aria-pressed="false">
+                                Игры
+                            </button>
+                            <button class="btn btn-outline-primary" 
+                                    data-filter="data"
+                                    aria-pressed="false">
+                                Данные
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Projects Grid -->
-            <div class="row g-4" id="projects-grid">
-                <!-- Projects will be loaded here by JavaScript -->
+                <!-- Projects Grid -->
+                <div class="row g-4" id="projects-grid" role="list" aria-label="Список проектов">
+                    <!-- Projects will be loaded here by JavaScript -->
+                </div>
+                
+                <!-- Loading state -->
+                <div id="loading-state" class="text-center mt-4" aria-live="polite" aria-atomic="true">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Загрузка проектов...</span>
+                    </div>
+                    <p class="mt-2">Загрузка проектов...</p>
+                </div>
+                
+                <!-- Empty state -->
+                <div id="empty-state" class="text-center mt-4 visually-hidden" 
+                     aria-live="polite" aria-atomic="true">
+                    <p>Проекты не найдены. Попробуйте выбрать другой фильтр.</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="custom-footer py-4">
+    <footer class="custom-footer py-4" role="contentinfo">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-12 text-center text-md-start">
                     <p class="mb-0">&copy; 2025 DevPort. Это всё равно никто не читает</p>
                 </div>
                 <div class="col-md-6 col-12 text-center text-md-end mt-3 mt-md-0">
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="GitHub"><i class="bi bi-github"></i></a>
-                        <a href="#" class="social-link" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                    <div class="social-links" role="list">
+                        <a href="#" class="social-link" aria-label="GitHub" role="listitem">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Telegram" role="listitem">
+                            <i class="bi bi-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn" role="listitem">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email" role="listitem">
+                            <i class="bi bi-envelope"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -89,5 +144,4 @@
     <script src="../scripts/projects.js"></script>
     <script src="../scripts/main.js"></script>
 </body>
-<a href="#main-content" class="skip-link">Перейти к основному контенту</a>
 </html>

@@ -982,3 +982,246 @@ body {
             );
     }
 }
+/* A11y Improvements */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--matrix-green);
+    color: var(--matrix-dark);
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    z-index: 10000;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 6px;
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Focus styles for all interactive elements */
+.btn:focus,
+.nav-link:focus,
+.form-control:focus,
+.form-select:focus,
+.social-link:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.5);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn-primary {
+        background-color: #00ff41 !important;
+        border-color: #00ff41 !important;
+        color: #000000 !important;
+    }
+    
+    .btn-outline-primary {
+        border-color: #00ff41 !important;
+        color: #00ff41 !important;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #00ff41 !important;
+        color: #000000 !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .floating-card::before,
+    .profile-img,
+    .floating-element,
+    .glow-text,
+    .btn-glow::before {
+        animation: none;
+        transition: none;
+    }
+    
+    .floating-card {
+        perspective: none;
+    }
+}
+
+/* Screen reader only class */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Improved focus for form elements */
+.form-control:focus {
+    border-color: var(--matrix-green);
+    box-shadow: 0 0 0 0.2rem rgba(0, 255, 65, 0.25);
+}
+
+/* Better contrast for disabled elements */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Improved link contrast */
+a:not(.btn) {
+    color: var(--matrix-green);
+    text-decoration: underline;
+}
+
+a:not(.btn):hover,
+a:not(.btn):focus {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Role and state indicators */
+[role="button"]:focus,
+button:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Navigation improvements */
+.nav-link[aria-current="page"] {
+    font-weight: bold;
+    background: rgba(0, 255, 65, 0.1);
+}
+
+/* Form accessibility */
+.form-label.required::after {
+    content: " *";
+    color: #ff4444;
+}
+
+/* Error states */
+.form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.8 3.6.4.4.4-.4'/%3e%3cpath d='M6 7v1'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+/* Live region for dynamic content */
+[aria-live="polite"] {
+    position: relative;
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .btn,
+    .social-links,
+    .floating-elements,
+    #matrix {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    a {
+        color: black !important;
+        text-decoration: underline !important;
+    }
+}
+/* Matrix Theme Variables */
+:root {
+    --matrix-green: #00ff41;
+    --matrix-dark: #0a0a0a;
+    --matrix-darker: #050505;
+}
+
+/* Base Styles */
+body {
+    background-color: var(--matrix-darker);
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* A11y Improvements - FIXED Skip Link */
+
+
+/* Navigation - Remove underline */
+.nav-link {
+    font-weight: 500;
+    margin: 0 0.5rem;
+    position: relative;
+    transition: color 0.3s ease;
+    text-decoration: none !important; /* Remove underline */
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--matrix-green);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Form Improvements - Required fields */
+.form-label.required::after {
+    content: " *";
+    color: var(--matrix-green);
+    font-weight: bold;
+    text-shadow: 0 0 8px var(--matrix-green);
+    margin-left: 2px;
+}
+
+/* Error states - only show after invalid input */
+.form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.8 3.6.4.4.4-.4'/%3e%3cpath d='M6 7v1'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.invalid-feedback {
+    display: none; /* Hide by default */
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+.form-control.is-invalid ~ .invalid-feedback {
+    display: block; /* Show only when field is invalid */
+}
+
+/* Rest of your existing styles remain the same... */

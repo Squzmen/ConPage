@@ -1,10 +1,10 @@
-<!-- Обновленный index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Портфолио fullstack разработчика - DevPort">
     <title>DevPort - Матрица Талантов</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,23 +14,29 @@
 </head>
 
 <body class="loaded">
+
     <!-- Matrix Background Canvas -->
-    <canvas id="matrix"></canvas>
+    <canvas id="matrix" aria-hidden="true"></canvas>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar" 
+         aria-label="Основная навигация">
         <div class="container">
             <a class="navbar-brand glow-text" href="index.html">
-                <i class="bi bi-code-slash"></i> DevPort
+                <i class="bi bi-code-slash" aria-hidden="true"></i> 
+                <span>DevPort</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                    aria-expanded="false" aria-label="Переключить навигацию">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Главная</a>
+                        <a class="nav-link active" href="index.html" aria-current="page">
+                            Главная
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pages/projects.html">Проекты</a>
@@ -46,266 +52,307 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-lg-6 order-lg-1 order-2">
-                    <div class="hero-content">
-                        <h1 class="hero-title glow-text">
-                            Привет, я <span class="text-primary">Александр</span>
-                        </h1>
-                        <p class="hero-subtitle">FullStack Developer</p>
-                        <p class="hero-description adaptive-text">
-                            Студент факультета фулстек программирования. Специализируюсь на создании
-                            и изучении самых бесполезных знаний и технологий.
-                        </p>
-                        <div class="hero-buttons">
-                            <a href="#skills" class="btn btn-primary btn-glow me-3">
-                                <i class="bi bi-stars"></i> Мои навыки
-                            </a>
-                            <a href="pages/projects.html" class="btn btn-outline-light">
-                                <i class="bi bi-laptop"></i> Проекты
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 order-lg-2 order-1">
-                    <div class="hero-image">
-                        <div class="floating-card">
-                            <img src="images/wrizz-monkey-monkey.gif" 
-                                 alt="Фото студента - Александр"
-                                 class="profile-img responsive-img high-dpi-img"
-                                 loading="eager"
-                                 width="350" 
-                                 height="350">
-                            <div class="floating-elements">
-                                <div class="floating-element element-1">
-                                    <i class="bi bi-react"></i>
-                                </div>
-                                <div class="floating-element element-2">
-                                    <i class="bi bi-braces"></i>
-                                </div>
-                                <div class="floating-element element-3">
-                                    <i class="bi bi-database"></i>
-                                </div>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-lg-6 order-lg-1 order-2">
+                        <div class="hero-content">
+                            <h1 id="hero-title" class="hero-title glow-text">
+                                Привет, я <span class="text-primary">Александр</span>
+                            </h1>
+                            <p class="hero-subtitle">FullStack Developer</p>
+                            <p class="hero-description adaptive-text">
+                                Студент факультета фулстек программирования. Специализируюсь на создании
+                                и изучении самых бесполезных знаний и технологий.
+                            </p>
+                            <div class="hero-buttons">
+                                <a href="#skills" class="btn btn-primary btn-glow me-3">
+                                    <i class="bi bi-stars" aria-hidden="true"></i> 
+                                    Мои навыки
+                                </a>
+                                <a href="pages/projects.html" class="btn btn-outline-light">
+                                    <i class="bi bi-laptop" aria-hidden="true"></i> 
+                                    Проекты
+                                </a>
                             </div>
                         </div>
-                        
-                        <!-- Кнопка скачать резюме -->
-                        <div class="resume-download mt-5 pt-4">
-                            <a href="assets/resume.pdf" class="btn btn-outline-primary btn-glow" download>
-                                <i class="bi bi-download me-2"></i>Скачать резюме
-                            </a>
+                    </div>
+                    <div class="col-lg-6 order-lg-2 order-1">
+                        <div class="hero-image">
+                            <div class="floating-card">
+                                <img src="images/wrizz-monkey-monkey.gif" 
+                                     alt="Анимированная аватарка - обезьянка программист"
+                                     class="profile-img responsive-img high-dpi-img"
+                                     loading="eager"
+                                     width="350" 
+                                     height="350">
+                                <div class="floating-elements" aria-hidden="true">
+                                    <div class="floating-element element-1">
+                                        <i class="bi bi-react"></i>
+                                    </div>
+                                    <div class="floating-element element-2">
+                                        <i class="bi bi-braces"></i>
+                                    </div>
+                                    <div class="floating-element element-3">
+                                        <i class="bi bi-database"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Кнопка скачать резюме -->
+                            <div class="resume-download mt-5 pt-4">
+                                <a href="assets/resume.pdf" class="btn btn-outline-primary btn-glow" download>
+                                    <i class="bi bi-download me-2" aria-hidden="true"></i>
+                                    Скачать резюме (PDF, 2MB)
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section py-5">
-        <div class="container">
-            <h2 class="section-title text-center mb-5 glow-text">
-                <i class="bi bi-graph-up-arrow"></i> Технические навыки
-            </h2>
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section py-5" aria-labelledby="skills-title">
+            <div class="container">
+                <h2 id="skills-title" class="section-title text-center mb-5 glow-text">
+                    <i class="bi bi-graph-up-arrow" aria-hidden="true"></i> 
+                    Технические навыки
+                </h2>
 
-            <div class="row g-4">
-                <div class="col-md-6 col-12">
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <span>Лежание на диване</span>
-                            <span class="skill-percent">90%</span>
-                        </div>
-                        <div class="progress matrix-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-12">
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <span>PascalABC</span>
-                            <span class="skill-percent">85%</span>
-                        </div>
-                        <div class="progress matrix-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="row g-4" role="list">
+                    <div class="col-md-6 col-12" role="listitem">
+                        <div class="skill-card">
+                            <div class="skill-header">
+                                <span>Лежание на диване</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="progress matrix-progress">
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: 90%" aria-valuenow="90"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     aria-label="Лежание на диване: 90%">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-12">
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <span>YoptaScript</span>
-                            <span class="skill-percent">80%</span>
-                        </div>
-                        <div class="progress matrix-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="col-md-6 col-12" role="listitem">
+                        <div class="skill-card">
+                            <div class="skill-header">
+                                <span>PascalABC</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="progress matrix-progress">
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: 85%" aria-valuenow="85"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     aria-label="PascalABC: 85%">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-12">
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <span>Ничего</span>
-                            <span class="skill-percent">75%</span>
+                    <div class="col-md-6 col-12" role="listitem">
+                        <div class="skill-card">
+                            <div class="skill-header">
+                                <span>YoptaScript</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="progress matrix-progress">
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: 80%" aria-valuenow="80"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     aria-label="YoptaScript: 80%">
+                                </div>
+                            </div>
                         </div>
-                        <div class="progress matrix-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="col-md-6 col-12" role="listitem">
+                        <div class="skill-card">
+                            <div class="skill-header">
+                                <span>Ничего</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
+                            <div class="progress matrix-progress">
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: 75%" aria-valuenow="75"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     aria-label="Ничего: 75%">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projects Preview -->
-    <section class="projects-preview py-5">
-        <div class="container">
-            <h2 class="section-title text-center mb-5 glow-text">
-                <i class="bi bi-rocket-takeoff"></i> Избранные проекты
-            </h2>
+        <!-- Projects Preview -->
+        <section class="projects-preview py-5" aria-labelledby="projects-title">
+            <div class="container">
+                <h2 id="projects-title" class="section-title text-center mb-5 glow-text">
+                    <i class="bi bi-rocket-takeoff" aria-hidden="true"></i> 
+                    Избранные проекты
+                </h2>
 
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3 col-12">
-                    <div class="project-card">
-                        <div class="project-image image-container ratio-4-3">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/Babuska.jpg">
-                                <source media="(min-width: 768px)" srcset="images/Babuska.jpg">
-                                <img src="images/Babuska.jpg" 
-                                    alt="Комерческий форум - платформа для продаж"
-                                    class="responsive-img object-fit-cover"
-                                    loading="lazy"
-                                    width="300"
-                                    height="225">
-                            </picture>
-                            <div class="project-overlay">
-                                <div class="project-tech">
-                                    <span class="badge bg-primary">Стул</span>
-                                    <span class="badge bg-success">Картонка</span>
+                <div class="row g-4" role="list">
+                    <div class="col-md-6 col-lg-3 col-12" role="listitem">
+                        <article class="project-card">
+                            <div class="project-image image-container ratio-4-3">
+                                <picture>
+                                    <source media="(min-width: 1200px)" srcset="images/Babuska.jpg">
+                                    <source media="(min-width: 768px)" srcset="images/Babuska.jpg">
+                                    <img src="images/Babuska.jpg" 
+                                        alt="Комерческий форум - платформа для продаж"
+                                        class="responsive-img object-fit-cover"
+                                        loading="lazy"
+                                        width="300"
+                                        height="225">
+                                </picture>
+                                <div class="project-overlay">
+                                    <div class="project-tech">
+                                        <span class="badge bg-primary">Стул</span>
+                                        <span class="badge bg-success">Картонка</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="project-content">
-                            <h5>Commerce Platform</h5>
-                            <p class="adaptive-text">Полнофункциональная платформа для продаж</p>
-                            <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">Подробнее</a>
-                        </div>
+                            <div class="project-content">
+                                <h3>Commerce Platform</h3>
+                                <p class="adaptive-text">Полнофункциональная платформа для продаж</p>
+                                <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">
+                                    Подробнее
+                                    <span class="visually-hidden"> о проекте Commerce Platform</span>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 col-12" role="listitem">
+                        <article class="project-card">
+                            <div class="project-image image-container ratio-4-3">
+                                <picture>
+                                    <source media="(min-width: 1200px)" srcset="images/Taktika.jpg">
+                                    <source media="(min-width: 768px)" srcset="images/Taktika.jpg">
+                                    <img src="images/Taktika.jpg" 
+                                        alt="Тактический менеджер"
+                                        class="responsive-img object-fit-cover"
+                                        loading="lazy"
+                                        width="300"
+                                        height="225">
+                                </picture>
+                                <div class="project-overlay">
+                                    <div class="project-tech">
+                                        <span class="badge bg-warning">3 бутылки пива</span>
+                                        <span class="badge bg-info">Скотч</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <h3>Тактический менеджер</h3>
+                                <p class="adaptive-text">Умный менеджер задач с AI-аналитикой</p>
+                                <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">
+                                    Подробнее
+                                    <span class="visually-hidden"> о проекте Тактический менеджер</span>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 col-12" role="listitem">
+                        <article class="project-card">
+                            <div class="project-image image-container ratio-4-3">
+                                <picture>
+                                    <source media="(min-width: 1200px)" srcset="images/i.webp">
+                                    <source media="(min-width: 768px)" srcset="images/i.webp">
+                                    <img src="images/i.webp" 
+                                        alt="War Visualization"
+                                        class="responsive-img object-fit-cover"
+                                        loading="lazy"
+                                        width="300"
+                                        height="225">
+                                </picture>
+                                <div class="project-overlay">
+                                    <div class="project-tech">
+                                        <span class="badge bg-danger">Бредли</span>
+                                        <span class="badge bg-success">Абрамс</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <h3>War Analytics</h3>
+                                <p class="adaptive-text">Инструмент для визуализации big data</p>
+                                <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">
+                                    Подробнее
+                                    <span class="visually-hidden"> о проекте War Analytics</span>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 col-12" role="listitem">
+                        <article class="project-card">
+                            <div class="project-image image-container ratio-4-3">
+                                <picture>
+                                    <source media="(min-width: 1200px)" srcset="images/Menty.jpg">
+                                    <source media="(min-width: 768px)" srcset="images/Menty.jpg">
+                                    <img src="images/Menty.jpg" 
+                                        alt="Анализ рынка"
+                                        class="responsive-img object-fit-cover"
+                                        loading="lazy"
+                                        width="300"
+                                        height="225">
+                                </picture>
+                                <div class="project-overlay">
+                                    <div class="project-tech">
+                                        <span class="badge bg-purple">Валера</span>
+                                        <span class="badge bg-dark">Прогноз погоды</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <h3>Анализатор рынка</h3>
+                                <p class="adaptive-text">Мобильное приложение для отслеживания финансовой активности</p>
+                                <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">
+                                    Подробнее
+                                    <span class="visually-hidden"> о проекте Анализатор рынка</span>
+                                </a>
+                            </div>
+                        </article>
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3 col-12">
-                    <div class="project-card">
-                        <div class="project-image image-container ratio-4-3">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/Taktika.jpg">
-                                <source media="(min-width: 768px)" srcset="images/Taktika.jpg">
-                                <img src="images/Taktika.jpg" 
-                                    alt="Тактический менеджер"
-                                    class="responsive-img object-fit-cover"
-                                    loading="lazy"
-                                    width="300"
-                                    height="225">
-                            </picture>
-                            <div class="project-overlay">
-                                <div class="project-tech">
-                                    <span class="badge bg-warning">3 бутылки пива</span>
-                                    <span class="badge bg-info">Скотч</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h5>Тактический менеджер</h5>
-                            <p class="adaptive-text">Умный менеджер задач с AI-аналитикой</p>
-                            <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">Подробнее</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 col-12">
-                    <div class="project-card">
-                        <div class="project-image image-container ratio-4-3">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/i.webp">
-                                <source media="(min-width: 768px)" srcset="images/i.webp">
-                                <img src="images/i.webp" 
-                                    alt="War Visualization"
-                                    class="responsive-img object-fit-cover"
-                                    loading="lazy"
-                                    width="300"
-                                    height="225">
-                            </picture>
-                            <div class="project-overlay">
-                                <div class="project-tech">
-                                    <span class="badge bg-danger">Бредли</span>
-                                    <span class="badge bg-success">Абрамс</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h5>War Analytics</h5>
-                            <p class="adaptive-text">Инструмент для визуализации big data</p>
-                            <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">Подробнее</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 col-12">
-                    <div class="project-card">
-                        <div class="project-image image-container ratio-4-3">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/Menty.jpg">
-                                <source media="(min-width: 768px)" srcset="images/Menty.jpg">
-                                <img src="images/Menty.jpg" 
-                                    alt="Анализ рынка"
-                                    class="responsive-img object-fit-cover"
-                                    loading="lazy"
-                                    width="300"
-                                    height="225">
-                            </picture>
-                            <div class="project-overlay">
-                                <div class="project-tech">
-                                    <span class="badge bg-purple">Валера</span>
-                                    <span class="badge bg-dark">Прогноз погоды</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h5>Анализатор рынка</h5>
-                            <p class="adaptive-text">Мобильное приложение для отслеживания финансовой активности</p>
-                            <a href="pages/projects.html" class="btn btn-sm btn-outline-primary">Подробнее</a>
-                        </div>
-                    </div>
+                <div class="text-center mt-4">
+                    <a href="pages/projects.html" class="btn btn-primary btn-glow">
+                        <i class="bi bi-grid-3x3-gap" aria-hidden="true"></i> 
+                        Все проекты
+                    </a>
                 </div>
             </div>
-
-            <div class="text-center mt-4">
-                <a href="pages/projects.html" class="btn btn-primary btn-glow">
-                    <i class="bi bi-grid-3x3-gap"></i> Все проекты
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="custom-footer py-4">
+    <footer class="custom-footer py-4" role="contentinfo">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-12 text-center text-md-start">
                     <p class="mb-0">&copy; 2025 DevPort. Это всё равно никто не читает</p>
                 </div>
                 <div class="col-md-6 col-12 text-center text-md-end mt-3 mt-md-0">
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="GitHub"><i class="bi bi-github"></i></a>
-                        <a href="#" class="social-link" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                    <div class="social-links" role="list">
+                        <a href="#" class="social-link" aria-label="GitHub" role="listitem">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Telegram" role="listitem">
+                            <i class="bi bi-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn" role="listitem">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email" role="listitem">
+                            <i class="bi bi-envelope"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -318,6 +365,5 @@
     <script src="scripts/matrix.js"></script>
     <script src="scripts/main.js"></script>
 </body>
-<a href="#main-content" class="skip-link">Перейти к основному контенту</a>
 
 </html>
